@@ -26,7 +26,7 @@ const upload = multer({
 });
 //test
 app.get("/", (req,res)=>{
-    await request.post(
+     request.post(
         {
             url:"http://15.164.216.57:5002/set_media",
             formData : {
