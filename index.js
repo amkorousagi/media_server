@@ -25,7 +25,7 @@ const upload = multer({
     }),
 });
 //test
-app.get("/", async (req,res)=>{
+app.get("/", (req,res)=>{
     await request.post(
         {
             url:"http://15.164.216.57:5002/set_media",
@@ -41,6 +41,10 @@ app.get("/", async (req,res)=>{
         }
     );
     res.send("ok");
+});
+
+app.get("/test", (req,res)=>{
+    res.send("hi");
 });
 
 //get
