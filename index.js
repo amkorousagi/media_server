@@ -28,7 +28,7 @@ const upload = multer({
 app.get("/", async (req,res)=>{
     await request.post(
         {
-            url:"http://0.0.0.0:5002/set_media",
+            url:"http://15.164.216.57:5002/set_media",
             formData : {
                 file: fs.createReadStream('dog.jpeg')
             }
