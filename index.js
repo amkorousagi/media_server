@@ -4,6 +4,7 @@ var request = require("request");
 var fs = require('fs');
 var multer = require('multer');
 var path = require('path');
+const HTTPS = require('https');
 
 
 const get_media = require("./get_media");
@@ -28,7 +29,7 @@ const upload = multer({
 app.get("/", (req,res)=>{
      request.post(
         {
-            url:"http://15.164.216.57:5002/set_media",
+            url:"https://15.164.216.57:5002/set_media",
             formData : {
                 file: fs.createReadStream('dog.jpeg')
             }
@@ -71,8 +72,19 @@ app.post("/set_media", upload.single('file'), (req,res) =>{
     res.json(req.file.filename);
 });
 
-app.listen(5002, "0.0.0.0", function(){
-    console.log("server is running.. in 5002");
-});
+try {
+    const option = {
+      ca: fs.readFileSync('/etc/letsencrypt/live/knulmsmodule2.cf/fullchain.pem'),
+      key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/knulmsmodule2.cf/privkey.pem'), 'utf8').toString(),
+      cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/knulmsmodule2.cf/cert.pem'), 'utf8').toString(),
+    };
+  
+    HTTPS.createServer(option, app).listen(5002, () => {
+      colorConsole.success(`[HTTPS] Soda Server is started on port 5002`);
+    });
+  } catch (error) {
+    colorConsole.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+    colorConsole.warn(error);
+  }
 
 //media server
