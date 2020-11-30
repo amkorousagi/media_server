@@ -53,6 +53,7 @@ app.get("/test", (req,res)=>{
 //get
 
 app.get("/get_media", (req,res) =>{
+    res.type('mp4');
     const {resource} = req.query;
     res.setHeader("Content-Type", "media/mp4");
     get_media_instance.execute(resource, res);
@@ -66,6 +67,7 @@ app.get("/set_media", upload.single('file'), (req,res) =>{
 //post
 
 app.post("/get_media", (req,res) =>{
+    res.type('mp4');
     res.setHeader("Content-Type", "media/mp4");
     const resource = req.body.resource;
     get_media_instance.execute(resource, res);
