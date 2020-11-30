@@ -27,9 +27,10 @@ const upload = multer({
 });
 //test
 app.get("/", (req,res)=>{
+    /*
      request.post(
         {
-            url:"https://15.164.216.57:5002/set_media",
+            url:"https://knulmsmodule2.cf:5002/set_media",
             formData : {
                 file: fs.createReadStream('dog.jpeg')
             }
@@ -41,17 +42,18 @@ app.get("/", (req,res)=>{
             console.log('upload successfully,',body);
         }
     );
-    res.send("ok");
+    */
+    res.send("hi");
 });
-
+/*
 app.get("/test", (req,res)=>{
     res.send("hi");
 });
-
+*/
 //get
 
 app.get("/get_media", (req,res) =>{
-    const {resource} = req.query;
+    res.setHeader("Content-Type", "media/mp4");
     get_media_instance.execute(resource, res);
 });
 
@@ -63,6 +65,7 @@ app.get("/set_media", upload.single('file'), (req,res) =>{
 //post
 
 app.post("/get_media", (req,res) =>{
+    res.setHeader("Content-Type", "media/mp4");
     const resource = req.body.resource;
     get_media_instance.execute(resource, res);
 });
