@@ -3,10 +3,26 @@ class Get_Media{
     
     execute = async (resource, response) =>{
         try {
-            
-	    console.log("fd",resource);
             response.setHeader("content-type", "video/mp4");
-            var resourcePath = './media/'+resource;
+            var resourcePath = 'media/'+resource;
+
+            const data = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8" name="viewport" content="width=device-width"/>
+                <title>Movie Player</title>
+            </head>
+            <body>
+                <video width="320" height="240" controls>
+                    <source src="https://knulmsmodule2.cf:5002/help?resource=${resource}" type="video/mp4">
+                </video>
+            </body>
+            </html>
+            `;
+            response.writeHead(200, {'Content-Type':'text/html'});
+            response.end(data);
+            /*
             // 1. stream 생성
             var stream = fs.createReadStream(resourcePath);
             // 2. 잘게 쪼개진 stream 이 몇번 전송되는지 확인하기 위한 count
@@ -14,17 +30,17 @@ class Get_Media{
             var count = 0;
             // 3. 잘게 쪼개진 data를 전송할 수 있으면 data 이벤트 발생 
             stream.on('data', function(data) {
-            count = count + 1;
-            console.log('data count='+count);
-            // 3.1. data 이벤트가 발생되면 해당 data를 클라이언트로 전송
-            response.write(data);
+                count = count + 1;
+                console.log('data count='+count);
+                // 3.1. data 이벤트가 발생되면 해당 data를 클라이언트로 전송
+                response.write(data);
             });
 
             // 4. 데이터 전송이 완료되면 end 이벤트 발생
             stream.on('end', function () {
-            console.log('end streaming');
-            // 4.1. 클라이언트에 전송완료를 알림
-            response.end();
+                console.log('end streaming');
+                // 4.1. 클라이언트에 전송완료를 알림
+                response.end();
             });
 
             // 5. 스트림도중 에러 발생시 error 이벤트 발생
@@ -33,6 +49,7 @@ class Get_Media{
             // 5.2. 클라이언트로 에러메시지를 전달하고 전송완료
             response.end('500 Internal Server '+err);
             });
+            */
             /*
             stream.on("error", error => {
                 console.log(`Error reading file ${resourcePath}.`);
