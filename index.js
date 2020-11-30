@@ -53,6 +53,7 @@ app.get("/test", (req,res)=>{
 //get
 
 app.get("/get_media", (req,res) =>{
+    const {resource} = req.query;
     res.setHeader("Content-Type", "media/mp4");
     get_media_instance.execute(resource, res);
 });
