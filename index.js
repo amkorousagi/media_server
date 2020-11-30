@@ -54,7 +54,7 @@ app.get("/test", (req,res)=>{
 
 app.get("/get_media", (req,res) =>{
     console.log("meida");
-    const {resource} = req.query;
+    const resource = req.query.resource;
     get_media_instance.execute(resource, res);
 });
 
