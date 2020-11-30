@@ -3,7 +3,7 @@ class Get_Media{
     
     execute = async (resource, response) =>{
         try {
-            res.setHeader("content-type", "video/mp4");
+            response.setHeader("content-type", "video/mp4");
             var resourcePath = './media/'+resource;
             // 1. stream 생성
             var stream = fs.createReadStream(resourcePath);
@@ -33,9 +33,9 @@ class Get_Media{
             });
             */
             stream.on("error", error => {
-            console.log(`Error reading file ${resourcePath}.`);
-            console.log(error);
-            res.sendStatus(500);
+                console.log(`Error reading file ${resourcePath}.`);
+                console.log(error);
+                response.sendStatus(500);
             });
             stream.pipe(res);
 
