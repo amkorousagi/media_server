@@ -53,6 +53,7 @@ app.get("/test", (req,res)=>{
 //get
 
 app.get("/get_media", (req,res) =>{
+    const {resource} = req.query;
     get_media_instance.execute(resource, res);
 });
 
@@ -64,6 +65,7 @@ app.get("/set_media", upload.single('file'), (req,res) =>{
 //post
 
 app.post("/get_media", (req,res) =>{
+    const {resource} = req.query;
     get_media_instance.execute(resource, res);
 });
 
