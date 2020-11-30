@@ -3,6 +3,7 @@ class Get_Media{
     
     execute = async (resource, response) =>{
         try {
+            console.log("fd");
             response.setHeader("content-type", "video/mp4");
             var resourcePath = './media/'+resource;
             // 1. stream 생성
@@ -37,7 +38,7 @@ class Get_Media{
                 console.log(error);
                 response.sendStatus(500);
             });
-            stream.pipe(res);
+            stream.pipe(response);
 
         } catch(err) {
             //db error
