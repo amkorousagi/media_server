@@ -3,7 +3,8 @@ class Get_Media{
     
     execute = async (resource, response) =>{
         try {
-            console.log("fd");
+            
+	    console.log("fd",resource);
             response.setHeader("content-type", "video/mp4");
             var resourcePath = './media/'+resource;
             // 1. stream 생성
