@@ -51,7 +51,7 @@ app.get("/test", (req,res)=>{
 });
 */
 //get
-app.get("/help", (req,res)=>{
+app.get("/help", (req,response)=>{
     const resourcePath = "media/"+req.query.resource;
     // 1. stream 생성
     var stream = fs.createReadStream(resourcePath);
