@@ -51,6 +51,7 @@ app.get("/test", (req,res)=>{
 });
 */
 //get
+/*
 app.get("/help", (req,response)=>{
     const resourcePath = "media/"+req.query.resource;
     // 1. stream 생성
@@ -86,16 +87,17 @@ app.get("/get_media", (req,res) =>{
     console.log(resource);
     get_media_instance.execute(resource, res);
 });
-
+*/
 app.get("/set_media", upload.single('file'), (req,res) =>{
     console.log(req.file);
     res.json(req.file.path);
 });
 
-app.get("/video", function (req, res) {
+app.get("/get_media", function (req, res) {
     // Listing 3.
     const options = {};
-    const [filePath] = req.query;
+    const {resource} = req.query;
+    const filePath = 'media/' + resource;
 
     let start;
     let end;
