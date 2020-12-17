@@ -121,7 +121,7 @@ app.get("/get_media", function (req, res) {
         }
     }
 
-    res.setHeader("content-type", "video/mp4");
+    res.setHeader("content-type", "image");
 
     fs.stat(filePath, (err, stat) => {
         if (err) {
